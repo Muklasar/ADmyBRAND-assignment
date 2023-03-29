@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import AndLayer from './AndLayer';
 import Constant from './Constanct';
 
 
-const MultiLayerCheckbox = ({ setResult, args, argsSelectHandler }) => {
+const AndLayer = ({ setResult, args, argsSelectHandler }) => {
     // const [args, setArgs] = useState([
     //     { id: 1, title: "My Args", value: false },
     // ])
-    const [addOp, setAddOp] = useState([''])
     const [matchArg, setMatchArg] = useState()
     const [oprators, setOprators] = useState([
         // [
@@ -24,8 +22,8 @@ const MultiLayerCheckbox = ({ setResult, args, argsSelectHandler }) => {
     const [opSelect, setOpSelect] = useState()
     // const [result, setResult] = useState()
     const [constant, setConstant] = useState(false)
-    const [result1, setResult1] = useState(false)
-    const [result2, setResult2] = useState(false)
+    const [op1, setOp1] = useState()
+    const [op2, setOp2] = useState()
     // op
     const opSelectHandler = (e) => {
         const { value } = e.target
@@ -52,28 +50,18 @@ const MultiLayerCheckbox = ({ setResult, args, argsSelectHandler }) => {
         console.log("matchArg", value, matchArg.value)
     }
 
-    useEffect(() => {
-        if (opSelect === 'argument' && matchArg) {
+    useEffect(()=>{
+        if(opSelect==='argument' && matchArg){
             setResult(matchArg.value)
         }
-        else if (opSelect == 'argument' || opSelect == '') {
+        else if(opSelect=='argument' || opSelect==''){
             setResult(false)
-        }else if(opSelect==="and"){
-            if(result1===true && result2===true){
-                setResult(true)
-            }
-            else(
-                setResult(false)
-            )
         }
-        else if(opSelect==="or"){
-            setResult(result1 || result2)
-        }
-        else (
+        else(
             setResult('undefined')
         )
-    }, [args, matchArg])
-    console.log("result",result1, result2)
+    },[args, matchArg])
+
     // and or
     const oprationHandler = (e) => {
         setOpration(e.target.value)
@@ -154,25 +142,10 @@ const MultiLayerCheckbox = ({ setResult, args, argsSelectHandler }) => {
                         </select>
                         <button onClick={deleteHandler}>X</button>
                     </div>
-                    {addOp.map(()=>
                     <div>
-                        <div>
-                            <AndLayer setResult={setResult1} args={args} argsSelectHandler={argsSelectHandler} />
-                            <AndLayer setResult={setResult2} args={args} argsSelectHandler={argsSelectHandler} />
-                        </div>
-                        <button className='' onClick={()=>setAddOp([...addOp, ''])}>add op</button>
-                    </div>)}
-                    {/* <div>
-              <select onChange={opArgsHandler} >
-                <option value="" >select...</option>
-                {args.map(arg =>
-                  <option value={arg.title} key={arg.id}>
-                    {arg.title}
-                  </option>
-                )}
-              </select>
-              <button onClick={deleteHandler}>X</button>
-            </div> */}
+                       
+                    </div>
+                    
                 </div>
             }
 
@@ -201,4 +174,4 @@ const MultiLayerCheckbox = ({ setResult, args, argsSelectHandler }) => {
     );
 };
 
-export default MultiLayerCheckbox;
+export default AndLayer;
