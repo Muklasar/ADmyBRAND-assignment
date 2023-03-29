@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+
+.opretion-section, .result-section{
+  margin-top: 4rem;
+}
+
+.and-or-section{
+  margin-bottom: 1rem;
+}
